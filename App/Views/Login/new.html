@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block body %}
+
+<section>
+    <div id="page-wrapper" class="sign-in-wrapper">
+        <div class="graphs">
+            <div class="sign-in-form">
+                <div class="sign-in-form-top">
+                    <h1>Log in</h1>
+                </div>
+                <div class="signin">
+                    
+                    <form action="/login/create" method="post">
+                        <div class="signin-rit">
+                            <span class="checkbox1">
+                                 <label class="checkbox"><input type="checkbox" name="remember_me" {% if remember_me %} checked="checked"{% endif %} />Stay logged in</label>
+                            </span>
+                            <p><a href="/password/forgot" data-target="#recoverPassword" class="register">Forgot Password?</a> </p>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <br>
+                        <div class="log-input">
+                            <div class="log-input-left">
+                            <input type="text" class="user" name="email" placeholder="Email address" autofocus value="{{ email }}" class="form-control"/>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="log-input">
+                            <div class="log-input-left">
+                            <input type="password" class="lock" name="password" placeholder="Password" class="form-control"/>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <input type="submit" value="Log in">
+                    </form>	 
+                </div>
+                <div class="new_people">
+                    <h2>For New People</h2>
+                    <p>Having hands on experience in creating innovative designs,I do offer design 
+                        solutions which harness.</p>
+                    <a href="/signup/new" data-target="#password" class="register">Register Now!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+          {% endblock %}

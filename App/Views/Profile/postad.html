@@ -1,0 +1,212 @@
+{% extends "profilebase.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+
+
+
+<section>
+        <div class="submit-ad main-grid-border">
+    <div class="container">
+        <h2 class="head">Post an Ad</h2>
+            {% if postad.errors is not empty %}
+                <ul>
+                    {% for error in postad.errors %}
+                    <div class="container alert alert-danger">
+                        <li>{{ error }}</li>
+                    </div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if user.errors is not empty %}
+                <ul>
+                    {% for error in user.errors %}
+                    <div class="container alert alert-danger">
+                        <li>{{ error }}</li>
+                    </div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+        <div class="post-ad-form">
+                
+            <form action="/profile/createad" method="post" enctype="multipart/form-data">
+                <label>Select Category <span>*</span></label>
+                <select class="" name="ad_category">
+                  <option>Select Category</option>
+                  <option>Mobiles</option>
+                  <option>Electronics and Appliances</option>
+                  <option>Cars</option>
+                  <option>Bikes</option>
+                  <option>Furniture</option>
+                  <option>Pets</option>
+                  <option>Books, Sports and hobbies</option>
+                  <option>Fashion</option>
+                  <option>Kids</option>
+                  <option>Services</option>
+                  <option>Real, Estate</option>
+                </select>
+                <div class="clearfix"></div>
+                <label>Ad Title <span>*</span></label>
+                <input type="text" class="phone" name="ad_title" placeholder="">
+                <div class="clearfix"></div>
+                <label>Ad Caption <span>*</span></label>
+                <input type="text" class="phone" name="ad_caption" maxlength="150" placeholder="This ad example is affordable at a negotiable price">
+                <div class="clearfix"></div>
+                <label>Ad Price <span>*</span></label>
+                <input type="text" class="phone" name="ad_price" placeholder="">
+                <div class="clearfix"></div>
+                <label>Ad condition <span>*</span></label>
+                <select class="" name="ad_condition">
+                  <option>Excellent</option>
+                  <option>Good</option>
+                  <option>Fair</option>
+                  <option>Needs Repair</option>
+                  <option>Scrap</option>
+                </select>
+                <div class="clearfix"></div>
+                <label>Ad Description <span>*</span></label>
+                <textarea class="mess" name="ad_description" placeholder="Write few lines about your product"></textarea>
+                <div class="clearfix"></div>
+            <div class="upload-ad-photos">
+            <label>Photos for your ad :</label>	
+                <div class="photos-upload-view">
+
+                    <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />
+
+                    <div>
+							<input type="file" id="fileselect" name="ad_image" multiple="multiple" />
+							<div id="filedrag">or drop files here</div>
+						</div>
+
+						<div id="submitbutton">
+							<button type="submit">Upload Files</button>
+                        </div>
+                        <div id="messages">
+                            <p>Status Messages</p>
+                        </div>
+                </div>
+                <div class="clearfix"></div>
+                    <script src="../js/filedrag.js"></script>
+            </div>
+                <div class="personal-details"></div>
+            
+                        <input type="submit" value="Post">	
+                <div class="clearfix"></div>
+            </form>
+               
+        </div>
+    </div>	
+</div>
+<a id="manageProfile"><span class="cog"> <i class="fa fa-cog fa-spin fa-2x"></i></span></a>
+</section>
+
+{% endblock %}
+
+{% block modal %}
+
+	<!-- Modal -->
+	<!-- main settings modal -->
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div>
+                  <ul class="manage-profile">
+                    <li><a data-toggle="modal" data-target="#storeName">Store Name</a></li>
+                    <li><a data-toggle="modal" data-target="#password">Password</a></li>
+                    <li><a data-toggle="modal" data-target="#address">Address</a></li>
+                    <li><a data-toggle="modal" data-target="#phoneNumber">Phone Number</a></li>
+                  </ul>
+              </div>
+        </div>
+          <!-- change store name modal -->
+          <div id="storeName" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+                      <!-- Modal content-->
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Change Store Name</h4>
+                </div>
+                <div class="pos">
+                          <form action="/profile/updateshop" method="post">
+                              <input type="text" class="store-name" name="shop_name" required placeholder="New store name">
+                              <br>
+                              <input type="submit" value="Change" class="submit-modal">
+                              <div class="clearfix"></div>
+                          </form>
+              </div>
+          </div>
+          </div>
+          <!-- change password name modal -->
+          <div id="password" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+                      <!-- Modal content-->
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Change Password </h4>
+                </div>
+                <div class="pos">
+                          <form action="/profile/updatepassword" method="post">
+                              <input type="password" name="password" class="store-name" required placeholder="New password">
+                              <br>
+                              <input type="password" name="password_confirmation" required class="store-name" placeholder="Confirm New password">
+                              <br>
+                              <input type="submit" value="Change" class="submit-modal">
+                              <div class="clearfix"></div>
+                          </form>
+              </div>
+          </div>
+          </div>
+           <!-- change Address name modal -->
+           <div id="address" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+                      <!-- Modal content-->
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Change Address </h4>
+                </div>
+                
+                <div class="pos">
+                        <div class="row">
+                                <div class="col-xs-7">
+                            <p><span>Address:</span> {{ user.phone_number }}.</p>
+                            </div>
+                                
+                        </div>
+                          <form action="/profile/updateaddress" method="post">
+                              <input type="text" name="address" class="store-name" required placeholder="New Address">
+                              <br>
+                              <input type="submit" value="Change" class="submit-modal">
+                              <div class="clearfix"></div>
+                          </form>
+              </div>
+          </div>
+          </div>
+          <!-- change phoneNumber name modal -->
+          <div id="phoneNumber" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-lg">
+                          <!-- Modal content-->
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Change Phone Number </h4>
+                    </div>
+                    
+                    <div class="pos">
+                            <div class="row">
+                                    <div class="col-xs-7">
+                                <p><span>Phone Number:</span> {{ user.phone_number }}</p>
+                                </div>
+                                    
+                            </div>
+                              <form action="/profile/updatephonenumber" method="post">
+                                  <input type="text" name="phone_number" required class="store-name" placeholder="New Address">
+                                  <br>
+                                  <input type="submit" value="Change" class="submit-modal">
+                                  <div class="clearfix"></div>
+                              </form>
+                  </div>
+              </div>
+              </div>
+          
+          
+          {% endblock %}

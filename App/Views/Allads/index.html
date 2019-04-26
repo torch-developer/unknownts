@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block title %}All ads{% endblock %}
+
+{% block body %}
+
+<!-- Products -->
+<div class="total-ads main-grid-border" style="margin-top: 2%">
+    <div class="container">
+        <div class="all-categories">
+            <h3> General Store</h3>
+            <ul class="all-cat-list">
+                <li><a href="mobiles.html">Mobiles <span class="num-of-ads">({{ count_mobiles }})</span></a></li>
+                <li><a href="electronics-appliances.html">Electronics & Appliances  <span class="num-of-ads">({{ count_ElectronicsAppliances }})</span></a></li>
+                <li><a href="real-estate.html">Real Estate  <span class="num-of-ads">({{ count_RealEstate }})</span></a></li>
+                <li><a href="furnitures.html">Furniture    <span class="num-of-ads">({{ count_Furniture }})</span></a></li>
+                <li><a href="pets.html">Pets   <span class="num-of-ads">({{ count_Pets }})</span></a></li>
+                <li><a href="books-sports-hobbies.html">Books, Sports & Hobbies    <span class="num-of-ads">({{ count_BooksSportsHobbies }})</span></a></li>
+                <li><a href="fashion.html">Fashion   <span class="num-of-ads">({{ count_Fashion }})</span></a></li>
+                <li><a href="kids.html">Kids   <span class="num-of-ads">({{ count_Kids }})</span></a></li>
+                <li><a href="services.html">Services   <span class="num-of-ads">({{ count_Services }})</span></a></li>
+                <li><a href="cars.html">Cars   <span class="num-of-ads">({{ count_Cars }})</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<ol class="breadcrumb" style="margin-bottom: 5px;">
+          <li><a href="index.html">Home</a></li>
+          <li class="active">All Ads</li>
+        </ol>
+        <div class="ads-grid">
+            <div class="side-bar col-md-3">
+<form class="form-form" action="/allads/search?q={{ _get.q}}" method="GET">
+    <div>
+    <input type="submit" value="Search" class="search-submit"  >
+    <input type="search" name="q" class="search-search" required="">
+    </div> 
+</form>
+<div class="clearfix"></div>
+                <div class="search-hotel">
+                <h3 class="sear-head">Price range</h3>
+                <form>
+                    <input type="number" value="Product name..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Product name...';}" required="">
+                    <input type="submit" value=" ">
+                </form>
+            </div>
+
+            <div class="featured-ads">
+                <h2 class="sear-head fer">Featured Ads</h2>
+                <div class="featured-ad">
+                    <a href="single.html">
+                        <div class="featured-ad-left">
+                            <img src="../images/f1.jpg" title="ad image" alt="" />
+                        </div>
+                        <div class="featured-ad-right">
+                            <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
+                            <p>&#x20A6; 450</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+                <div class="featured-ad">
+                    <a href="single.html">
+                        <div class="featured-ad-left">
+                            <img src="../images/f2.jpg" title="ad image" alt="" />
+                        </div>
+                        <div class="featured-ad-right">
+                            <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
+                            <p><span>&#8358;</span>380</p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            </div>
+            <div class="ads-display col-md-9">
+                <div class="wrapper">					
+                <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                  <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist">
+                    <li role="presentation" class="active">
+                      <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+                        <span class="text">All Ads</span>
+                      </a>
+                    </li>
+                  </ul>
+                  <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
+                       <div>
+                                            <div id="container">
+                            <div class="sort">
+                               <div class="sort-by">
+                                    <label>Sort By : </label>
+                               
+                                    <select name="sort">
+                                                    <option value="">Most recent</option>
+                                                    <option value="">Price: Rs Low to High</option>
+                                                    <option value="">Price: Rs High to Low</option>
+                                    </select>
+                               
+                                   </div>
+                                 </div>
+                            <div class="clearfix"></div>
+                        {% for allad in allads %}
+                        <ul class="list">
+                            <a href="/allads/single?id={{ allad.id }}">
+                                <li>
+                                <img src="../{{ allad.ad_image }}" title="" alt="" />
+                                <section class="list-left">
+                                <h5 class="title">{{ allad.ad_title }}</h5>
+                                <span class="adprice"><span>&#8358;</span>{{ allad.ad_price }}</span>
+                                
+                                </section>
+                                <section class="list-right">
+                                <span class="date">Today, 17:55</span>
+                                <span class="cityname">Ad title</span>
+                                </section>
+                                <div class="clearfix"></div>
+                                </li> 
+                            </a>
+                            
+                        </ul>
+                        {% endfor %}
+                    
+                    </div>
+                        </div>
+                    </div>
+                    
+                    <ul class="pagination pagination-sm">
+                        <li><a href="#">Prev</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">6</a></li>
+                        <li><a href="#">7</a></li>
+                        <li><a href="#">8</a></li>
+                        <li><a href="#">Next</a></li>
+                    </ul>
+                  </div>
+                </div>
+            </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>	
+</div>
+
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Reset password{% endblock %}
+
+{% block footer %}
+    <script src="/js/hideShowPassword.min.js"></script>
+    <script src="/js/app.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            /**
+             * Validate the form
+             */
+            $('#formPassword').validate({
+                rules: {
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        validPassword: true
+                    }
+                }
+            });
+
+
+            /**
+              * Show password toggle button
+              */
+            $('#inputPassword').hideShowPassword({
+                show: false,
+                innerToggle: 'focus'
+            });
+        });
+    </script>
+
+{% endblock %}
+
+{% block body %}
+
+    <h1>Reset password</h1>
+
+    {% if user.errors is not empty %}
+        <p>Errors:</p>
+        <ul>
+            {% for error in user.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <section>
+            <div id="page-wrapper" class="sign-in-wrapper">
+                <div class="graphs">
+                    <div class="sign-in-form">
+                        <div class="sign-in-form-top">
+                            <h1>Request password reset</h1>
+                        </div>
+                        <div class="signin">
+                            
+                            <form id="formPassword" action="/password/reset-password" method="post">
+
+                                <input type="hidden" name="token" value="{{ token }}" />
+
+                                <br>
+                                <div class="log-input">
+                                    <div class="log-input-left">
+                                    <input type="password" class="user" name="password" placeholder="Password" required autofocus required class="form-control"/>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+
+                                <br>
+                                <div class="log-input">
+                                    <div class="log-input-left">
+                                    <input type="password" class="user" name="password_confirmation" placeholder="Confrim Password" required autofocus required class="form-control"/>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                
+                                <input type="submit" value="Reset">
+                            </form>	 
+                        </div>
+                    </div>
+                </div>
+            </div>
+     </section>
+
+
+{% endblock %}

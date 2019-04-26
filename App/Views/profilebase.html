@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/bootstrap-select.css">
+<link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="../css/font-awesome.min.css" />
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Resale Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<!--fonts-->
+<link href='//fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<!--//fonts-->	
+<!-- js -->
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<!-- js -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/bootstrap-select.js"></script>
+<script>
+  $(document).ready(function () {
+    var mySelect = $('#first-disabled2');
+
+    $('#special').on('click', function () {
+      mySelect.find('option:selected').prop('disabled', true);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#special2').on('click', function () {
+      mySelect.find('option:disabled').prop('disabled', false);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#basic2').selectpicker({
+      liveSearch: true,
+      maxOptions: 1
+    });
+  });
+</script>
+<script type="text/javascript" src="../js/jquery.leanModal.min.js"></script>
+<link href="../css/jquery.uls.css" rel="stylesheet"/>
+<link href="../css/jquery.uls.grid.css" rel="stylesheet"/>
+<link href="../css/jquery.uls.lcd.css" rel="stylesheet"/>
+<!-- Source -->
+<script src="../js/jquery.uls.data.js"></script>
+<script src="../js/jquery.uls.data.utils.js"></script>
+<script src="../js/jquery.uls.lcd.js"></script>
+<script src="../js/jquery.uls.languagefilter.js"></script>
+<script src="../js/jquery.uls.regionfilter.js"></script>
+<script src="../js/jquery.uls.core.js"></script>
+<script>
+			$( document ).ready( function() {
+				$( '.uls-trigger' ).uls( {
+					onSelect : function( language ) {
+						var languageName = $.uls.data.getAutonym( language );
+						$( '.uls-trigger' ).text( languageName );
+					},
+					quickList: ['en', 'hi', 'he', 'ml', 'ta', 'fr'] //FIXME
+				} );
+			} );
+		</script>
+</head>
+<body>
+
+    <div class="container">
+
+				{% for message in flash_messages %}
+						<div class="alert alert-{{ message.type }}">
+								{{ message.body }}
+						</div>
+				{% endfor %}
+		
+    </div>
+    
+<div class="header">
+		<div class="container-fluid navbar">
+			<nav class=" ">
+  <div  >
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar navbar-span"></span>
+        <span class="icon-bar navbar-span"></span>
+        <span class="icon-bar navbar-span"></span>
+      </button>
+      <div class="logo navbar-brand">
+				<a href="/"><span>Torch</span>sale</a>
+			</div>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class=""><a href="/">Home</a></li>
+        <li class="active-li"><a href="/profile/postad">Post Ad</a></li>
+        <li class="dropdown navbar-li">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Posted Ad
+        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	        <li class=""><a href="/profile/alcategory">All Category</a></li>
+			<li class=""><a href="bikes-pro.html">Mobiles</a></li>
+			<li class=""><a href="bikes-pro.html">Electronics and Appliances</a></li>
+			<li class=""><a href="bikes-pro.html">Cars</a></li>
+			<li class=""><a href="bikes-pro.html">Bikes</a></li>
+			<li class=""><a href="bikes-pro.html">Furniture</a></li>
+			<li class=""><a href="bikes-pro.html">Pets</a></li>
+			<li class=""><a href="bikes-pro.html">Books, Sports and hobbies</a></li>
+			<li class=""><a href="bikes-pro.html">Fashion</a></li>
+			<li class=""><a href="bikes-pro.html">Kids</a></li>
+			<li class=""><a href="bikes-pro.html">Services</a></li>
+			<li class=""><a href="bikes-pro.html">Real Estate</a></li>
+        </ul>
+        </ul>
+      </li>
+  	</ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/logout" class="glyphicon glyphicon-log-out"><span > Sign Out</span> </a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+		</div>
+	</div>
+    {% block body %}
+    {% endblock %}
+
+		<!--footer section start-->
+			<footer class="diff">
+			   <p class="text-center">&copy 2019 Torchsale. All Rights Reserved | Design by <a href="javascript:void(0)" target="_blank">Firmtorch</a></p>
+			</footer>
+        <!--footer section end-->
+
+        {% block modal %}
+        {% endblock %}
+
+<script type="text/javascript">
+	$("#manageProfile").click(function(){
+		$("#mySidenav").slideToggle(700);
+	});
+	$(".closebtn").click(function(){
+		$("#mySidenav").slideToggle(400);
+	});
+</script>
+<script type="text/javascript" src="../js/script1.js"></script>
+{% block footer %}
+{% endblock %}
+</body>
+</html>

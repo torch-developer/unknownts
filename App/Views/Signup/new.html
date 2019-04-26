@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block footer %}
+
+    <script src="/js1/hideShowPassword.min.js"></script>
+    <script src="/js1/app.js"></script>
+
+    <script>
+        /**
+        * Add jQuery Validation plugin method for a valid password
+        *
+        * Valid passwords contain at least one letter and one number.
+        */
+        $.validator.addMethod('validPassword',
+            function(value, element, param) {
+
+                if (value != '') {
+                    if (value.match(/.*[a-z]+.*/i) == null) {
+                        return false;
+                    }
+                    if (value.match(/.*\d+.*/) == null) {
+                        return false;
+                    }
+                }
+
+                return true;
+            },
+            'Must contain at least one letter and one number'
+        );
+
+        $(document).ready(function() {
+
+            /**
+            * Validate the form
+            */
+            $('#formSignup').validate({
+                rules: {
+                    name: 'required',
+                    email: {
+                        required: true,
+                        email: true,
+                        remote: '/account/validate-email'
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        validPassword: true
+                    },
+                    password_confirmation: {
+                        equalTo: '#inputPassword'
+                    }
+                },
+                messages: {
+                    email: {
+                        remote: 'email already taken'
+                    }
+                }
+            });
+        });
+    </script>
+
+{% endblock %}
+
+{% block body %}
+
+    {% if user.errors is not empty %}
+        <ul>
+            {% for error in user.errors %}
+            <div class="container alert alert-danger">
+                <li>{{ error }}</li>
+            </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    <section>
+        <div id="page-wrapper" class="sign-in-wrapper">
+            <div class="graphs">
+                <div class="sign-in-form">
+                    <div class="sign-in-form-top">
+                        <h1>Signup</h1>
+                    </div>
+                    <div class="signin" action>
+                        <form method="post" action="/signup/create" id="formSignup">
+                        <div class="log-input">
+                            <div class="log-input-left">
+                            <input type="text" class="user" name="email" placeholder="Email" autofocus value="{{ user.email }}" required/>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="log-input">
+                            <div class="log-input-left">
+                            <input type="text" class="user" name="shop_name" placeholder="Shop Name" autofocus value="{{ user.shop_name }}" required/>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="log-input">
+                            <div class="log-input-left">
+                            <input type="text" class="user" name="phone_number" placeholder="Phone Number" autofocus value="{{ user.phone_number }}" required/>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="log-input">
+                            <div class="log-input-left">
+                            <input type="text" class="user" name="address" placeholder="Address" autofocus value="{{ user.address }}" required/>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="log-input">
+                            <div class="log-input-left">
+                            <input type="password" class="lock" name="password" placeholder="Password" value=""/>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="log-input">
+                            <div class="log-input-left">
+                            <input type="password" class="lock" name="password_confirmation" placeholder="Confrime Password" value=""/>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <input type="submit" value="Sign up">
+                    </form>	 
+                    </div>
+                    <div class="new_people">
+                            <h2>Already a member</h2>
+                            <p>Having hands on experience in creating innovative designs,I do offer design 
+                                solutions which harness.</p>
+                            <a href="/login/new" data-target="#password" class="register">Login Now!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
