@@ -73,4 +73,5 @@ class Allads extends \Core\Controller
             'singleAdId' => $postad::singleAdId($_GET['id'])
         ]);
     }
+
 }
